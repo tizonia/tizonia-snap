@@ -1,4 +1,4 @@
-[![Snap Status](https://build.snapcraft.io/badge/tizonia/tizonia-openmax-il.svg)](https://build.snapcraft.io/user/tizonia/tizonia-openmax-il)
+[![Snap Status](https://build.snapcraft.io/badge/tizonia/tizonia-snap.svg)](https://build.snapcraft.io/user/tizonia/tizonia-snap)
 
 # Tizonia Snap
 
