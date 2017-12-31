@@ -27,11 +27,13 @@ package locally, use the 'cleanbuild' method.
 ```bash
 
 # Install lxd and get it started
-$ sudo apt install lxd lxd-client zfsutils-linux
-$ sudo lxd init
+$ sudo apt install lxd lxd-client zfsutils-linux && sudo lxd init
+
+# This is in case your user is not in the lxd group already
+$ sudo usermod -a -G lxd $USER && newgrp lxd
 
 # From the top of this repo, build Tizonia inside a lxd container.
-$ sudo snapcraft cleanbuild --debug
+$ snapcraft cleanbuild --debug
 
 ```
 
