@@ -221,7 +221,7 @@ parts:
 
   wrapper:
     plugin: dump
-    source: snap/wrapper
+    source: wrapper
     organize:
       tizonia-snap-wrapper.sh: bin/tizonia-snap-wrapper.sh
     after:
