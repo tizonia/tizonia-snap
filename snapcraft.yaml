@@ -69,13 +69,13 @@ parts:
       apt-get update && apt-get -y install libspotify-dev
     build: |
       autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
-      ./configure --prefix=$SNAPCRAFT_PART_INSTALL --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
+      ./configure --prefix=$SNAPCRAFT_PART_INSTALL --with-boost-libdir=/usr/lib/$(DEB_HOST_MULTIARCH) --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
       make -j1 V=0
     install: |
       make install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
       perl -i -p -e 's|^rmdb.*|rmdb = \$TIZONIA_PLUGINS_DIR/share/tizrmd/tizrm.db|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
-      perl -i -p -e 's|^Icon=tizonia|Icon=/usr/share/icons/hicolor/256x256/apps/tizonia\.png|' $SNAPCRAFT_PART_INSTALL/share/applications/tizonia.desktop
+      perl -i -p -e 's|^Icon=tizonia|Icon=/share/icons/hicolor/256x256/apps/tizonia\.png|' $SNAPCRAFT_PART_INSTALL/share/applications/tizonia.desktop
     build-packages:
       - build-essential
       - autoconf
