@@ -9,7 +9,7 @@ confinement: strict
 
 apps:
   tizonia:
-    desktop: usr/share/applications/tizonia.desktop
+    desktop: share/applications/tizonia.desktop
     command: bin/tizonia-snap-wrapper.sh
     plugs:
       - home
@@ -73,7 +73,7 @@ parts:
       make install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
       perl -i -p -e 's|^rmdb.*|rmdb = \$TIZONIA_PLUGINS_DIR/share/tizrmd/tizrm.db|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
-      perl -i -p -e 's|^Icon=tizonia|Icon=/usr/share/icons/hicolor/256x256/apps/tizonia\.png|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/tizonia.desktop
+      perl -i -p -e 's|^Icon=tizonia|Icon=/usr/share/icons/hicolor/256x256/apps/tizonia\.png|' $SNAPCRAFT_PART_INSTALL/share/applications/tizonia.desktop
     build-packages:
       - build-essential
       - autoconf
