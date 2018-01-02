@@ -69,7 +69,7 @@ parts:
       apt-get update && apt-get -y install libspotify-dev
     build: |
       autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
-      ./configure --prefix=$SNAPCRAFT_PART_INSTALL --with-boost-libdir=/usr/lib/$(DEB_HOST_MULTIARCH) --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
+      ./configure --prefix=$SNAPCRAFT_PART_INSTALL --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
       make -j1 V=0
     install: |
       make install
@@ -83,6 +83,7 @@ parts:
       - automake
       - autotools-dev
       - libtool
+      - dpkg-dev
       - libmad0-dev
       - liblog4c-dev
       - libasound2-dev
