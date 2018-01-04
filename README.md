@@ -53,7 +53,7 @@ $ snapcraft cleanbuild --debug
 
 # License
 
-[MIT](LICENSE.md)
+[MIT](LICENSE)
 
 # Tizonia's main repo
 
