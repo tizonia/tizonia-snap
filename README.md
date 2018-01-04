@@ -2,7 +2,7 @@
 
 # Tizonia Snap
 
-A 'snap' package is now available for download from the snap store ('stable
+A 'snap' package is now available for download from the snap store ('stable'
 channel). To install, make sure you have
 [snapd](https://docs.snapcraft.io/core/install?_ga=2.41936226.1106178805.1514500852-128158267.1514500852)
 installed on your system. Once 'snapd' is available, use this command to
