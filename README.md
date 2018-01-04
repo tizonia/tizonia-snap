@@ -53,4 +53,8 @@ $ snapcraft cleanbuild --debug
 
 # License
 
-MIT
+[MIT](LICENSE.md)
+
+# Tizonia's main repo
+
+See [tizonia-openmax-il](https://github.com/tizonia/tizonia-openmax-il).
