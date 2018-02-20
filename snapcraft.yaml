@@ -9,6 +9,7 @@ confinement: strict
 
 apps:
   tizonia:
+    desktop: share/applications/tizonia.desktop
     command: bin/tizonia-snap-wrapper.sh
     plugs:
       - home
@@ -74,11 +75,14 @@ parts:
           execstack --clear-execstack /usr/lib/libspotify.so.12.1.51
       fi
     build: |
-      autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory' && ./configure --prefix=$SNAPCRAFT_PART_INSTALL --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' && make -j1 V=0
+      autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
+      ./configure --prefix=$SNAPCRAFT_PART_INSTALL --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
+      make -j1 V=0
     install: |
       make install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
       perl -i -p -e 's|^rmdb.*|rmdb = \$TIZONIA_PLUGINS_DIR/share/tizrmd/tizrm.db|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
+      perl -i -p -e 's|^Icon=tizonia|Icon=/share/icons/hicolor/256x256/apps/tizonia\.png|' $SNAPCRAFT_PART_INSTALL/share/applications/tizonia.desktop
     build-packages:
       - build-essential
       - autoconf
@@ -86,6 +90,7 @@ parts:
       - automake
       - autotools-dev
       - libtool
+      - dpkg-dev
       - libmad0-dev
       - liblog4c-dev
       - libasound2-dev
