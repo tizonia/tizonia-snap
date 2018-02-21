@@ -68,7 +68,7 @@ parts:
       echo "deb http://apt.mopidy.com/ stable main contrib non-free" | tee -a /etc/apt/sources.list
       # fi
       apt-get update && apt-get -y install libspotify-dev
-      execstack --clear-execstack usr/lib/libspotify.so.* || true
+      execstack --clear-execstack $SNAPCRAFT_PART_INSTALL/usr/lib/libspotify.so.* || true
     build: |
       autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
       ./configure --prefix=$SNAPCRAFT_PART_INSTALL --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
