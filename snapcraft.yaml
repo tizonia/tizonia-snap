@@ -7,6 +7,16 @@ description: |
 grade: stable
 confinement: strict
 
+slots:
+  tizrmd-daemon: # Tizonia's OpenMAX IL resource management daemon
+    interface: dbus
+    bus: session
+    name: com.aratelia.tiz.tizrmd
+  tizcastd-daemon: # Tizonia's Chromecast access daemon
+    interface: dbus
+    bus: session
+    name: com.aratelia.tiz.tizcastd
+
 apps:
   tizonia:
     desktop: share/applications/tizonia.desktop
@@ -22,6 +32,8 @@ apps:
       - x11
     slots:
       - mpris
+      - tizrmd-daemon
+      - tizcastd-daemon
 
 parts:
   pypideps:
@@ -68,8 +80,7 @@ parts:
       echo "deb http://apt.mopidy.com/ stable main contrib non-free" | tee -a /etc/apt/sources.list
       # fi
       apt-get update && apt-get -y install libspotify-dev
-      execstack --clear-execstack $SNAPCRAFT_PART_INSTALL/usr/lib/libspotify.so.* || true
-      execstack --clear-execstack $SNAPCRAFT_PART_INSTALL/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH)/libspotify.so.* || true
+      find / ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \;
     build: |
       autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
       ./configure --prefix=$SNAPCRAFT_PART_INSTALL --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --without-bashcompletiondir --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
