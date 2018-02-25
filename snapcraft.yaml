@@ -80,6 +80,7 @@ parts:
       echo "deb http://apt.mopidy.com/ stable main contrib non-free" | tee -a /etc/apt/sources.list
       # fi
       apt-get update && apt-get -y install libspotify-dev
+      find / ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \; || true
       find . ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \; || true
     build: |
       autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
@@ -163,6 +164,7 @@ parts:
   env:
     plugin: nil
     prepare: |
+      find / ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \; || true
       find . ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \; || true
     stage-packages:
       - libmad0
