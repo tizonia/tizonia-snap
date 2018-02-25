@@ -162,6 +162,8 @@ parts:
 
   env:
     plugin: nil
+    prepare: |
+      find . ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \; || true
     stage-packages:
       - libmad0
       - liblog4c3
