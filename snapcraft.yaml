@@ -1,9 +1,9 @@
 name: tizonia
-version: 0.12.0
+version: 0.13.0
 summary: Tizonia command-line cloud music player.
 description: |
   Command-line cloud music player for Linux with support for Spotify,
-  Google Play Music, YouTube, SoundCloud, Dirble and Chromecast.
+  Google Play Music, YouTube, SoundCloud, Dirble, Plex and Chromecast.
 grade: stable
 confinement: strict
 
@@ -71,6 +71,9 @@ parts:
       - pycountry
       - titlecase
       - pychromecast
+      - plexapi
+      - fuzzywuzzy
+      - eventlet
     filesets:
       no-need-stuff:
         - -include/
@@ -86,7 +89,7 @@ parts:
   tizonia:
     plugin: autotools
     source: https://github.com/tizonia/tizonia-openmax-il.git
-    # source-tag: 0.12.0
+    # source-tag: 0.13.0
     prepare: |
       # NOTE: The check for Mopidy's apt archive presence in sources.list is disabled,
       # since it fails when building with 'snapcraft cleanbuild'.
