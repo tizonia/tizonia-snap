@@ -93,6 +93,7 @@ parts:
     source: https://github.com/plamere/spotipy
     filesets:
       no-need-stuff:
+        - -bin/chardetect
         - -include/
         - -var/
         - -share/
