@@ -1,5 +1,5 @@
 name: tizonia
-version: 0.14.0
+version: 0.15.0
 summary: Tizonia command-line cloud music player.
 description: |
   Command-line cloud music player for Linux with support for Spotify,
@@ -87,6 +87,24 @@ parts:
     prime:
       - $no-need-stuff
 
+  spotipy:
+    plugin: python
+    source-type: git
+    source: https://github.com/plamere/spotipy
+    filesets:
+      no-need-stuff:
+        - -include/
+        - -var/
+        - -share/
+        - -usr/share
+        - -snap/
+    stage:
+      - $no-need-stuff
+    prime:
+      - $no-need-stuff
+    after:
+      - pypideps
+
   tizonia:
     plugin: autotools
     source: https://github.com/tizonia/tizonia-openmax-il.git
@@ -172,7 +190,7 @@ parts:
       - curl
       - execstack
     after:
-      - pypideps
+      - spotipy
     organize:
       usr/lib/python2.7/site-packages: lib/python2.7/site-packages
     filesets:
