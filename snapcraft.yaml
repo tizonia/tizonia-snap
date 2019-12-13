@@ -1,9 +1,9 @@
 name: tizonia
-version: 0.18.0
+version: 0.19.0
 summary: Tizonia command-line cloud music player.
 description: |
   Command-line cloud music player for Linux with support for Spotify,
-  Google Play Music, YouTube, SoundCloud, Dirble, Plex and Chromecast.
+  Google Play Music, YouTube, SoundCloud, Plex and Chromecast.
 grade: stable
 confinement: strict
 
