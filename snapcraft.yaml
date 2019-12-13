@@ -59,7 +59,7 @@ apps:
 parts:
   pypideps:
     plugin: python
-    python-version: python2
+    python-version: python3
     build-packages:
       - python-dev
       - libxml2-dev
@@ -90,7 +90,7 @@ parts:
 
   spotipy:
     plugin: python
-    python-version: python2
+    python-version: python3
     source-type: git
     source: https://github.com/plamere/spotipy
     filesets:
