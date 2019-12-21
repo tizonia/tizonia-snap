@@ -113,6 +113,7 @@ parts:
     source: https://github.com/tizonia/tizonia-openmax-il.git
     # source-tag: 0.13.0
     override-build: |
+      env
       # NOTE: The check for Mopidy's apt archive presence in sources.list is disabled,
       # since it fails when building with 'snapcraft cleanbuild'.
       # Re-enable when building without cleanbuild to avoid adding the apt archive
@@ -126,7 +127,7 @@ parts:
       # fi
       apt-get update && apt-get -y install libspotify-dev
       autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
-      ./configure LIBS=$SNAPCRAFT_PART_INSTALL/lib --prefix=$SNAPCRAFT_PART_INSTALL/usr --sysconfdir=$SNAPCRAFT_PART_INSTALL/etc --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --with-bashcompletiondir=$SNAPCRAFT_PART_INSTALL/usr/share/bash-completion/completions --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
+      ./configure --prefix=$SNAPCRAFT_PART_INSTALL/usr --sysconfdir=$SNAPCRAFT_PART_INSTALL/etc --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --with-bashcompletiondir=$SNAPCRAFT_PART_INSTALL/usr/share/bash-completion/completions --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
       make -j1 V=0
       make install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
