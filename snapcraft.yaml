@@ -233,6 +233,12 @@ parts:
       - libspotify12
       - libcurl3
       - libffi6
+      - libpython3.6
+      - libslang2
+      - libgl1
+      - libglu1-mesa
+      - libglvnd0
+      - libglx0
       - sqlite3
       - dbus-x11
     filesets:
