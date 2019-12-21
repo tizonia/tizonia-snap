@@ -216,7 +216,7 @@ parts:
       - libboost-program-options1.58.0
       - uuid-runtime
       - libsdl1.2debian
-      - libvpx3
+      - libvpx5
       - libmp3lame0
       - libfaad2
       - libtag1v5
