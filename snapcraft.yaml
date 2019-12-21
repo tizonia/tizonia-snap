@@ -6,6 +6,7 @@ description: |
   Google Play Music, YouTube, SoundCloud, Plex and Chromecast.
 grade: stable
 confinement: strict
+base: core18
 
 slots:
   tizrmd-slot: # Tizonia's OpenMAX IL resource management daemon
@@ -127,7 +128,7 @@ parts:
       # fi
       apt-get update && apt-get -y install libspotify-dev
       autoreconf -ifsv 2>&1 | grep --color=always '.*Entering directory'
-      ./configure --prefix=$SNAPCRAFT_PART_INSTALL/usr --sysconfdir=$SNAPCRAFT_PART_INSTALL/etc --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --with-bashcompletiondir=$SNAPCRAFT_PART_INSTALL/usr/share/bash-completion/completions --without-zshcompletiondir --enable-silent-rules CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
+      ./configure --prefix=$SNAPCRAFT_PART_INSTALL/usr --sysconfdir=$SNAPCRAFT_PART_INSTALL/etc --with-boost-libdir=/usr/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) --with-bashcompletiondir=$SNAPCRAFT_PART_INSTALL/usr/share/bash-completion/completions --without-zshcompletiondir --enable-silent-rules PYTHON_CPPFLAGS='-I/usr/include/python3.6m' CFLAGS='-O2 -s -DNDEBUG' CXXFLAGS='-O2 -s -DNDEBUG -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' || cat player/config.log
       make -j1 V=0
       make install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
@@ -186,7 +187,7 @@ parts:
     after:
       - spotipy
     organize:
-      usr/lib/python3.5/site-packages: lib/python3.5/site-packages
+      usr/lib/python3.6/site-packages: lib/python3.6/site-packages
     filesets:
       no-need-stuff:
         - -include/
