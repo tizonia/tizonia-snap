@@ -1,8 +1,29 @@
 [![Snap Status](https://build.snapcraft.io/badge/tizonia/tizonia-snap.svg)](https://build.snapcraft.io/user/tizonia/tizonia-snap)
 
+# Call For Maintainers
+
+Unfortunately, the snap package is taking too much of my time to maintain,
+given the number of other release tasks that I need to deal with during a
+normal release cycle of Tizonia.
+
+I've been thinking about it for some time now and I would love it if someone
+from the community wanted step up and contribute with the maintenance of the
+Tizonia Snap package in this repo. That would allow me to focus a bit more on
+features and less on packaging.
+
+It is not a difficult task, it is just a matter of some (free) time.
+
+There are lots of users (2500+) that use the Snap of Tizonia regularly and rely
+on this package to be up-to-date.
+
+Any help would be most welcome.
+
+Thanks!
+Juan
+
 # Tizonia Snap
 
-A 'snap' package is now available for download from the snap store ('stable'
+A 'snap' package is available for download from the snap store ('stable'
 channel). To install, make sure you have
 [snapd](https://docs.snapcraft.io/core/install?_ga=2.41936226.1106178805.1514500852-128158267.1514500852)
 installed on your system. Once 'snapd' is available, use this command to
