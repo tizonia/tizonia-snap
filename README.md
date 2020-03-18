@@ -2,6 +2,9 @@
 
 # Call For Maintainers
 
+There are lots of users (2500+) that use the Snap of Tizonia regularly and rely
+on this package to be up-to-date.
+
 Unfortunately, the snap package is taking too much of my time to maintain,
 given the number of other release tasks that I need to deal with during a
 normal release cycle of Tizonia.
@@ -12,9 +15,6 @@ Tizonia Snap package in this repo. That would allow me to focus a bit more on
 features and less on packaging.
 
 It is not a difficult task, it is just a matter of some (free) time.
-
-There are lots of users (2500+) that use the Snap of Tizonia regularly and rely
-on this package to be up-to-date.
 
 Any help would be most welcome.
 
