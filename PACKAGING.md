@@ -1,5 +1,5 @@
-Tizonia's Snap release TODO list
-================================
+Tizonia's Snap Development
+==========================
 
 # Overview
 
