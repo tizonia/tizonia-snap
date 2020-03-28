@@ -32,8 +32,10 @@ Snap package, it is recommended to migrate it to Meson.
 - Learning about Snaps: https://snapcraft.io/docs/getting-started
 - Snap packaging for C/C++ applications: https://snapcraft.io/docs/c-c-applications
 - Snap packaging for Python applications: https://snapcraft.io/docs/python-apps
-- https://snapcraft.io/docs/meson-plugin
-https://snapcraft.io/docs/iterating-over-a-build
+- The Meson Snap plugin: https://snapcraft.io/docs/meson-plugin
+- About Snap packaging with Multipass:
+  - https://snapcraft.io/docs/iterating-over-a-build
+  - https://readyspace.co.id/en/faster-snap-development-additional-tips-and-tricks/
 
 # Snap TODO items
 
