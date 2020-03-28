@@ -16,7 +16,8 @@ features and less on packaging.
 
 It is not a difficult task, it is just a matter of some (free) time.
 
-Any help would be most welcome.
+The document [PACKAGING.md](PACKAGING.md) contains some information to get
+people started. Any help would be most welcome!.
 
 Thanks!
 
