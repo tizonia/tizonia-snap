@@ -17,15 +17,15 @@ activities of the Tizonia project.
 # Resources
 
 Tizonia is a hybrid application that confluates code written in C, C++ and
-Python. While packaging Tizonia as a Snap (are in any other format for that
+Python. While packaging Tizonia as a Snap (or in any other format for that
 matter) it is important to keep this in mind.
 
 Another important detail to know about is that Tizonia has recently added a
 Meson build system in the main repository. However, the Snap package still uses
-the old Autotools build system as of version 0.18.0. The Meson build system is
-still co-existing with Autotools in the main repo (will be deprecated at some
-point). But for future refreshes of the Snap package, the migration to Meson is
-the recommended option.
+the old Autotools build system as of version 0.18.0. Note that the Meson build
+system co-exists with Autotools in the main repo, but Autotools will be
+deprecated at some point in the near future. So for the next refresh of the
+Snap package, it is recommended to migrate it to Meson.
 
 - Tizonia's main repository: https://github.com/tizonia/tizonia-openmax-il
 - Building Tizonia with Meson: https://github.com/tizonia/tizonia-openmax-il/blob/master/BUILDING_with_meson.md
