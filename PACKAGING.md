@@ -72,13 +72,36 @@ and the compilation will fail. Use the `SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY`
 environment variable to instantiate Multipass VMs with at least 8GB of RAM.
 
 E.g.: from the top of the `tizonia-snap` repo
-- `SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY=24G snapcraft --debug`
+- `SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY=16G snapcraft --debug`
 
 (NOTE: If you have already issued an `snapcraft --debug` with the default RAM,
 adding the `SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY` environment variable afterwards
 will not work as the VM memory cannot be modified at that point. You will need
 to explicitly destroy the existing VM by calling `snapcraft clean`, and then
 start over).
+
+While at it, if you have enough CPUs on your machine, you can also increase the
+number of CPUs that Multipass will allocate on the VM (the default is 2
+CPUs). To make use of the additional CPUs, you need to modify the the number of parallel jobs
+that ninja will use during the build. This value is 1 in the snapcraft.yaml, to avoid running out of memory.
+
+E.g.:
+```
+ninja -j1 -C build --> ninja -j8 -C build
+
+```
+
+But REMEMBER: The more CPUs used in parallel by ninja, the more RAM required
+for the overall build process.
+
+
+E.g.: To use 8 CPUs, you may need a whopping 24GB or RAM allocated to the
+VM!. So adjust these numbers according to the RAM/CPU resources available on
+your host machine.
+
+- `SNAPCRAFT_BUILD_ENVIRONMENT_CPU=8 SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY=24G snapcraft --debug`
+
+
 
 ### Gotcha #3
 Sometimes, the `snapcraft --debug` commands fails with a message like this:
@@ -87,8 +110,12 @@ Sometimes, the `snapcraft --debug` commands fails with a message like this:
 E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
 E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?'
 ```
-This may happen when the Multipass VM has not been used for a while and Ubuntu's `unattended-upgrades` is doing its thing.
-It may be worth just deleting the VM and recreating it.
+
+This may happen when the Multipass VM has not been used for a while and
+Ubuntu's `unattended-upgrades` is doing its thing. One option is to just drop
+with a shell on the VM and simply wait for the upgrade process to finish, or
+even, run apt-get upgrade yourself. It all else fails, it may be worth to just
+delete the VM and recreate it.
 
 - `multipass list` (to list the existing VMs)
 - `multipass delete snapcraft-tizonia` (to mark for deletion the VM created by snapcraft to build tizonia)
