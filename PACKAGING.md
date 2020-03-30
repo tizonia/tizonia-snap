@@ -80,6 +80,20 @@ will not work as the VM memory cannot be modified at that point. You will need
 to explicitly destroy the existing VM by calling `snapcraft clean`, and then
 start over).
 
+### Gotcha #3
+Sometimes, the `snapcraft --debug` commands fails with a message like this:
+
+```
+E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?'
+```
+This may happen when the Multipass VM has not been used for a while and Ubuntu's `unattended-upgrades` is doing its thing.
+It may be worth just deleting the VM and recreating it.
+
+- `multipass list` (to list the existing VMs)
+- `multipass delete snapcraft-tizonia` (to mark for deletion the VM created by snapcraft to build tizonia)
+- `multipass purge` (to remove the VMs that are marked for deletion)
+
 # Snap TODO items
 
 This is a list of things that currently either need some work and are just
