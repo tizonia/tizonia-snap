@@ -1,5 +1,5 @@
 name: tizonia
-version: 0.20.0
+version: 0.21.0
 summary: Tizonia command-line cloud music player.
 description: |
   Command-line cloud music player for Linux with support for Spotify,
@@ -127,8 +127,10 @@ parts:
       curl https://apt.mopidy.com/stretch.list -o /etc/apt/sources.list.d/mopidy.list
       # fi
       apt-get update && apt-get -y install libspotify-dev
-      meson . build
+      pip3 uninstall --yes meson && pip3 install meson==0.53.0
+      meson . build --prefix=$SNAPCRAFT_PART_INSTALL/usr
       ninja -j1 -C build
+      ninja -C build install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
       perl -i -p -e 's|^rmdb.*|rmdb = \$TIZONIA_PLUGINS_DIR/usr/share/tizrmd/tizrm.db|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
       perl -i -p -e 's|^Icon=tizonia|Icon=/usr/share/icons/hicolor/256x256/apps/tizonia\.png|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/tizonia.desktop
@@ -136,10 +138,7 @@ parts:
       perl -i -p -e 's|^Exec.*|Exec=/usr/bin/tizrmd|' $SNAPCRAFT_PART_INSTALL/usr/share/dbus-1/services/com.aratelia.tiz.rm.service
     build-packages:
       - build-essential
-      - autoconf
-      - autoconf-archive
-      - automake
-      - autotools-dev
+      - cmake
       - libtool
       - dpkg-dev
       - libmad0-dev
@@ -239,6 +238,7 @@ parts:
       - libglx0
       - sqlite3
       - dbus-x11
+      - freeglut3
     filesets:
       no-need-stuff:
         - -include/
