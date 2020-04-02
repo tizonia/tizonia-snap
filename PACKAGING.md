@@ -56,7 +56,7 @@ Snap package, it is recommended to migrate it to Meson.
 `snapcraft` nowdays uses [Multipass](https://multipass.run/docs) VMs to build
 the snap packages. 
 
-### Gotcha #1
+### Tip #1
 Multipass VMs are stored in the 'vault' directory which
 lives under `/var/snap/multipass/common`. If you have a /root partition with
 limited space (like I do), Multipass can fill up the partition. Unfortunately,
@@ -65,7 +65,7 @@ customize the location of VM files in the system. See the following links for in
 - https://github.com/canonical/multipass/issues/1215
 - https://forum.snapcraft.io/t/moved-var-lib-snapd-into-home-snapd-and-symlicked-back-snaps-fail-to-start/15272/2
 
-### Gotcha #2
+### Tip #2
 Tizonia requires quite a bit of RAM during the build process. By default,
 Multipass creates VMs with 1GB or RAM. This won't cut it while building Tizonia
 and the compilation will fail. Use the `SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY`
@@ -102,24 +102,50 @@ your host machine.
 - `SNAPCRAFT_BUILD_ENVIRONMENT_CPU=8 SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY=24G snapcraft --debug`
 
 
-
-### Gotcha #3
-Sometimes, the `snapcraft --debug` commands fails with a message like this:
+### Tip #3
+Sometimes, the `snapcraft --debug` command fails with a message like this:
 
 ```
 E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
 E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?'
 ```
 
-This may happen when the Multipass VM has not been used for a while and
-Ubuntu's `unattended-upgrades` is doing its thing. One option is to just drop
-with a shell on the VM and simply wait for the upgrade process to finish, or
-even, run apt-get upgrade yourself. It all else fails, it may be worth to just
-delete the VM and recreate it.
+This happen from time to time. Apparently, Ubuntu's
+`unattended-upgrades` is doing its thing. One option is to just drop
+with a shell on the VM and simply wait for the upgrade process to
+finish, or even, run apt-get upgrade yourself. It all else fails, it
+may be worth to just delete the VM and recreate it.
 
 - `multipass list` (to list the existing VMs)
 - `multipass delete snapcraft-tizonia` (to mark for deletion the VM created by snapcraft to build tizonia)
 - `multipass purge` (to remove the VMs that are marked for deletion)
+
+### Tip #4
+
+Once you get to the point where the build process is successful, it is
+the time to start testing locally the new snap.
+
+- `sudo snap install tizonia_0.21.0_amd64.snap`
+
+It is likely that the applicaiton does not work the first time, or
+that some streaming services work but not others.
+
+You can for use these commands to inspect the snapped app environment
+```
+$ snap run --shell tizonia
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+juan@ubuntu1804:/home/juan/Documents$ env | grep HOME
+HOME=/home/juan/snap/tizonia/297
+
+juan@ubuntu1804:/home/juan/Documents$ 
+
+```
+
+More information on debugging the build process and on iterating over a build:
+- https://snapcraft.io/docs/debugging-building-snaps
+- https://snapcraft.io/docs/iterating-over-a-build
 
 # Snap TODO items
 
