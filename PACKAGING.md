@@ -9,7 +9,7 @@ package updated and in sync with the latest fixes in the main repo
 (https://github.com/tizonia/tizonia-openmax-il).
 
 The Tizonia Snap package is lagging a few versions behind the latest release of
-Tizonia (0.18.0 vs 0.21.0). So it is in need of a refresh. The following is a
+Tizonia (0.18.0 vs 0.22.0). So it is in need of a refresh. The following is a
 list of resources and information on the status of the Tizonia Snap
 package. This might guide people wanting to help with the Snap packaging
 activities of the Tizonia project.
@@ -54,14 +54,15 @@ Snap package, it is recommended to migrate it to Meson.
 
 ## Building the Snap inside a Multipass instance
 `snapcraft` nowdays uses [Multipass](https://multipass.run/docs) VMs to build
-the snap packages. 
+the snap packages.
 
 ### Tip #1
-Multipass VMs are stored in the 'vault' directory which
-lives under `/var/snap/multipass/common`. If you have a /root partition with
-limited space (like I do), Multipass can fill up the partition. Unfortunately,
-at the time of writing, Multipass does not provide a configuration option to
-customize the location of VM files in the system. See the following links for information on possible workarounds to this problem.:
+Multipass VMs are stored in the 'vault' directory which lives under
+`/var/snap/multipass/common`. If you have a /root partition with limited space
+(like I do), Multipass can fill up the partition. Unfortunately, at the time of
+writing, Multipass does not provide a configuration option to customize the
+location of VM files in the system. See the following links for information on
+possible workarounds to this problem.:
 - https://github.com/canonical/multipass/issues/1215
 - https://forum.snapcraft.io/t/moved-var-lib-snapd-into-home-snapd-and-symlicked-back-snaps-fail-to-start/15272/2
 
@@ -82,8 +83,9 @@ start over).
 
 While at it, if you have enough CPUs on your machine, you can also increase the
 number of CPUs that Multipass will allocate on the VM (the default is 2
-CPUs). To make use of the additional CPUs, you need to modify the the number of parallel jobs
-that ninja will use during the build. This value is 1 in the snapcraft.yaml, to avoid running out of memory.
+CPUs). To make use of the additional CPUs, you need to modify the the number of
+parallel jobs that ninja will use during the build. This value is 1 in the
+snapcraft.yaml, to avoid running out of memory.
 
 E.g.:
 ```
@@ -95,9 +97,9 @@ But REMEMBER: The more CPUs used in parallel by ninja, the more RAM required
 for the overall build process.
 
 
-E.g.: To use 8 CPUs, you may need a whopping 24GB or RAM allocated to the
-VM!. So adjust these numbers according to the RAM/CPU resources available on
-your host machine.
+E.g.: To use 8 CPUs, you may need around 24GB or RAM allocated to the VM!. So
+adjust these numbers according to the RAM/CPU resources available on your host
+machine.
 
 - `SNAPCRAFT_BUILD_ENVIRONMENT_CPU=8 SNAPCRAFT_BUILD_ENVIRONMENT_MEMORY=24G snapcraft --debug`
 
@@ -125,7 +127,7 @@ may be worth to just delete the VM and recreate it.
 Once you get to the point where the build process is successful, it is
 the time to start testing locally the new snap.
 
-- `sudo snap install tizonia_0.21.0_amd64.snap`
+- `sudo snap install tizonia_0.22.0_amd64.snap`
 
 It is likely that the applicaiton does not work the first time, or
 that some streaming services work but not others.
@@ -139,7 +141,7 @@ See "man sudo_root" for details.
 juan@ubuntu1804:/home/juan/Documents$ env | grep HOME
 HOME=/home/juan/snap/tizonia/297
 
-juan@ubuntu1804:/home/juan/Documents$ 
+juan@ubuntu1804:/home/juan/Documents$
 
 ```
 
@@ -152,7 +154,7 @@ More information on debugging the build process and on iterating over a build:
 This is a list of things that currently either need some work and are just
 definitely broken in the snap. Migration to Meson is the first task in the list
 as it is the one that should be accomplished first in order to update the Snap
-package to the latest version of Tizonia (0.21.0).
+package to the latest version of Tizonia (0.22.0).
 
 - [ ] Migrate to Meson (this should be a must for the next release).
 - [ ] Test and fix Chromecast functionality (optional for the next release).
