@@ -114,6 +114,7 @@ parts:
   tizonia:
     plugin: meson
     source: https://github.com/tizonia/tizonia-openmax-il.git
+    source-commit: 9671f7443c714f008c18765ca8b6c01d36eb0fba
     override-build: |
       env
       # NOTE: The check for Mopidy's apt archive presence in sources.list is disabled,
@@ -129,7 +130,7 @@ parts:
       # fi
       apt-get update && apt-get -y install libspotify-dev
       pip3 uninstall --yes meson && pip3 install meson==0.53.0
-      meson . build --prefix=$SNAPCRAFT_PART_INSTALL/usr
+      meson . build --prefix=$SNAPCRAFT_PART_INSTALL/usr --sysconfdir=$SNAPCRAFT_PART_INSTALL/etc --localstatedir=$SNAPCRAFT_PART_INSTALL/var --sharedstatedir=$SNAPCRAFT_PART_INSTALL/var/lib
       ninja -j1 -C build
       ninja -C build install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
@@ -182,24 +183,6 @@ parts:
       - dbus-x11
       - curl
       - execstack
-    after:
-      - spotipy
-    organize:
-      usr/lib/python3.6/site-packages: lib/python3.6/site-packages
-    filesets:
-      no-need-stuff:
-        - -include/
-        - -var/
-        - -snap/
-    stage:
-      - $no-need-stuff
-    prime:
-      - $no-need-stuff
-
-  env:
-    plugin: nil
-    override-build: |
-      find / ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \; || true
     stage-packages:
       - libmad0
       - liblog4c3
@@ -228,8 +211,7 @@ parts:
       - libflac8
       - liboggz2
       - libsndfile1
-      - libspotify12
-      - libcurl3
+      - libcurl4
       - libffi6
       - libpython3.6
       - libslang2
@@ -240,47 +222,53 @@ parts:
       - sqlite3
       - dbus-x11
       - freeglut3
+      - libasn1-8-heimdal
+      - libasyncns0
+      - libcaca0
+      - libgssapi3-heimdal
+      - libhcrypto4-heimdal
+      - libheimbase1-heimdal
+      - libheimntlm0-heimdal
+      - libhx509-5-heimdal
+      - libicu60
+      - libkrb5-26-heimdal
+      - libldap-2.4-2
+      - libmms0
+      - libpsl5
+      - libroken18-heimdal
+      - librtmp1
+      - libsasl2-2
+      - libspeex1
+      - libtag1v5-vanilla
+      - libtinyxml2-6
+      - libvorbisenc2
+      - libwind0-heimdal
+      - libx11-6
+      - libxau6
+      - libxcb1
+      - libxdmcp6
+      - libxext6
+      - libzen0v5
+    after:
+      - spotipy
+    organize:
+      usr/lib/python3.6/site-packages: lib/python3.6/site-packages
     filesets:
       no-need-stuff:
         - -include/
         - -var/
         - -snap/
-      no-usr-lib-python2-dot-7:
-        - -usr/bin/2to3-2.7
-        - -usr/bin/pydoc2.7
-        - -usr/lib/python2.7/UserString.py
-        - -usr/lib/python2.7/base64.py
-        - -usr/lib/python2.7/cProfile.py
-        - -usr/lib/python2.7/cgi.py
-        - -usr/lib/python2.7/encodings/rot_13.py
-        - -usr/lib/python2.7/ensurepip/__init__.py
-        - -usr/lib/python2.7/keyword.py
-        - -usr/lib/python2.7/lib2to3/pgen2/token.py
-        - -usr/lib/python2.7/mimify.py
-        - -usr/lib/python2.7/pdb.py
-        - -usr/lib/python2.7/platform.py
-        - -usr/lib/python2.7/profile.py
-        - -usr/lib/python2.7/pydoc.py
-        - -usr/lib/python2.7/quopri.py
-        - -usr/lib/python2.7/sitecustomize.py
-        - -usr/lib/python2.7/smtpd.py
-        - -usr/lib/python2.7/smtplib.py
-        - -usr/lib/python2.7/symbol.py
-        - -usr/lib/python2.7/tabnanny.py
-        - -usr/lib/python2.7/test/pystone.py
-        - -usr/lib/python2.7/test/regrtest.py
-        - -usr/lib/python2.7/timeit.py
-        - -usr/lib/python2.7/trace.py
-        - -usr/lib/python2.7/uu.py
-        - -usr/lib/python2.7/webbrowser.py
-        - -usr/share/python/dh_python2
-        - -usr/share/python/pyversions.py
     stage:
       - $no-need-stuff
-      - $no-usr-lib-python2-dot-7
     prime:
       - $no-need-stuff
-      - $no-usr-lib-python2-dot-7
+
+  env:
+    plugin: nil
+    override-build: |
+      find / ! -readable -prune -o -type f -name "libspotify.so.*" -exec ls {} \; -exec execstack --clear-execstack {} \; || true
+    stage-packages:
+      - libspotify12
     after:
       - tizonia
 

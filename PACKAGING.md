@@ -127,10 +127,10 @@ may be worth to just delete the VM and recreate it.
 Once you get to the point where the build process is successful, it is
 the time to start testing locally the new snap.
 
-- `sudo snap install tizonia_0.22.0_amd64.snap`
+- `sudo snap install --dangerous tizonia_0.22.0_amd64.snap`
 
-It is likely that the applicaiton does not work the first time, or
-that some streaming services work but not others.
+It is likely that the application does not work the first time, or that some
+streaming services work but not others.
 
 You can for use these commands to inspect the snapped app environment
 ```
