@@ -1,12 +1,15 @@
 #!/bin/bash
 
+LC_ALL=C.UTF-8
+export LC_ALL
+
 case "$SNAP_ARCH" in
     "amd64") ARCH='x86_64-linux-gnu'
              ;;
-    "i386") ARCH='i386-linux-gnu'
-            ;;
-    "armhf") ARCH="arm-linux-gnueabihf"
-             ;;
+#     "i386") ARCH='i386-linux-gnu'
+#             ;;
+#     "armhf") ARCH="arm-linux-gnueabihf"
+#              ;;
     *)
         echo "Unsupported architecture for this app build"
         exit 1
