@@ -27,17 +27,27 @@ system co-exists with Autotools in the main repo, but Autotools will be
 deprecated at some point in the near future. So for the next refresh of the
 Snap package, it is recommended to migrate it to Meson.
 
-- Tizonia's main repository: https://github.com/tizonia/tizonia-openmax-il
-- Building Tizonia with Meson: https://github.com/tizonia/tizonia-openmax-il/blob/master/BUILDING_with_meson.md
-- Learning about Snaps: https://snapcraft.io/docs/getting-started
-- Learning about the Snapcraft tool: https://snapcraft.io/docs/snapcraft-overview
-- Snap packaging for C/C++ applications: https://snapcraft.io/docs/c-c-applications
-- Snap packaging for Python applications: https://snapcraft.io/docs/python-apps
-- The Meson Snap plugin: https://snapcraft.io/docs/meson-plugin
+- Tizonia's main repository:
+  - https://github.com/tizonia/tizonia-openmax-il
+- Building Tizonia with Meson:
+  - https://github.com/tizonia/tizonia-openmax-il/blob/master/BUILDING_with_meson.md
+- About Snaps:
+  - https://snapcraft.io/docs/getting-started
+- About the Snapcraft tool:
+  - https://snapcraft.io/docs/snapcraft-overview
+- Snap packaging for C/C++ applications:
+  - https://snapcraft.io/docs/c-c-applications
+- Snap packaging for Python applications:
+  - https://snapcraft.io/docs/python-apps
+- The Meson Snap plugin:
+  - https://snapcraft.io/docs/meson-plugin
 - About Snap packaging with Multipass:
   - https://snapcraft.io/docs/iterating-over-a-build
   - https://readyspace.co.id/en/faster-snap-development-additional-tips-and-tricks/
-- Some gotchas: https://daveparrish.net/posts/2019-08-16-Gotchas-When-Creating-Snap-Package-For-Haskell-Program.html
+- Environment Variables that Snapcraft consumes:
+  - https://forum.snapcraft.io/t/environment-variables-that-snapcraft-consumes/9416
+- Gotchas and Tips:
+  - https://daveparrish.net/posts/2019-08-16-Gotchas-When-Creating-Snap-Package-For-Haskell-Program.html
 
 # Workflow (Ubuntu 18.04 assumed)
 
