@@ -8,6 +8,9 @@ description: |
 grade: stable
 confinement: strict
 base: core18
+architectures:
+  - build-on: amd64
+    run-on: amd64
 
 slots:
   tizrmd-slot: # Tizonia's OpenMAX IL resource management daemon
@@ -48,7 +51,7 @@ apps:
       - home
       - network
       - network-bind
-      - pulseaudio
+      - audio-playback
       - process-control
       - alsa
       - removable-media
