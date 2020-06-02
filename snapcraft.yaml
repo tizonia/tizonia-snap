@@ -45,7 +45,7 @@ apps:
 
   tizonia:
     desktop: usr/share/applications/tizonia.desktop
-    command: bin/tizonia-snap-wrapper.sh
+    command: bin/snapcraft-preload $SNAP/bin/tizonia-snap-wrapper.sh
     completer: usr/share/bash-completion/completions/tizonia
     plugs:
       - home
@@ -55,6 +55,8 @@ apps:
       - process-control
       - alsa
       - removable-media
+      - mount-observe
+      - network-control
       - x11
       - tizrmd-plug
       - tizcastd-plug
@@ -62,6 +64,17 @@ apps:
       - mpris
 
 parts:
+  # Semaphore-support (Python multitasking)
+  snapcraft-preload:
+    source: https://github.com/diddledan/snapcraft-preload.git
+    source-branch: semaphore-support
+    plugin: cmake
+    build-packages:
+      - on amd64:
+          - gcc-multilib
+          - g++-multilib
+    stage-packages:
+      - lib32stdc++6
   pypideps:
     plugin: python
     python-version: python3
