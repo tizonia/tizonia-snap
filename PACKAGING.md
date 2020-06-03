@@ -232,3 +232,6 @@ package to the latest version of Tizonia (0.22.0).
 - Snapcraft-preload
   - https://github.com/sergiusens/snapcraft-preload
   - https://forum.snapcraft.io/t/python-multiprocessing-sem-open-blocked-in-strict-mode/962/18
+- Architectures and remote builds
+  - https://snapcraft.io/docs/architectures
+  - https://snapcraft.io/docs/remote-build
