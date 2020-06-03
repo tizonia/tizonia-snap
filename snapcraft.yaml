@@ -12,6 +12,12 @@ architectures:
   - build-on: amd64
     run-on: amd64
 
+  - build-on: i386
+    run-on: i386
+
+  - build-on: armhf
+    run-on: armhf
+
 slots:
   tizrmd-slot: # Tizonia's OpenMAX IL resource management daemon
     interface: dbus
