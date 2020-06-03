@@ -146,7 +146,7 @@ parts:
       # fi
       apt-get update && apt-get -y install libspotify-dev
       pip3 uninstall --yes meson && pip3 install meson==0.53.0
-      meson . build --prefix=$SNAPCRAFT_PART_INSTALL/usr --sysconfdir=$SNAPCRAFT_PART_INSTALL/etc --localstatedir=$SNAPCRAFT_PART_INSTALL/var --sharedstatedir=$SNAPCRAFT_PART_INSTALL/var/lib
+      meson . build --buildtype=release --prefix=$SNAPCRAFT_PART_INSTALL/usr --sysconfdir=$SNAPCRAFT_PART_INSTALL/etc --localstatedir=$SNAPCRAFT_PART_INSTALL/var --sharedstatedir=$SNAPCRAFT_PART_INSTALL/var/lib
       ninja -j1 -C build
       ninja -C build install
       perl -i -p -e 's|^component-paths.*|component-paths = \$TIZONIA_PLUGINS_DIR|' $SNAPCRAFT_PART_INSTALL/etc/xdg/tizonia/tizonia.conf
@@ -274,6 +274,14 @@ parts:
         - -include/
         - -var/
         - -snap/
+        - "-usr/lib/*/cmake/*"
+        - "-usr/include/*"
+        - "-usr/share/ECM/*"
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/bin/X11"
+        - "-usr/lib/gcc/x86_64-linux-gnu/6.0.0"
+        - "-usr/lib/aspell/*"
     stage:
       - $no-need-stuff
     prime:
