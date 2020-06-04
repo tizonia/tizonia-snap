@@ -80,7 +80,8 @@ parts:
           - gcc-multilib
           - g++-multilib
     stage-packages:
-      - lib32stdc++6
+      - on amd64 to amd64:
+        - lib32stdc++6
   pypideps:
     plugin: python
     python-version: python3
