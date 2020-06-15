@@ -137,7 +137,7 @@ parts:
   tizonia:
     plugin: meson
     source: https://github.com/tizonia/tizonia-openmax-il.git
-    source-commit: 208aa1483d2348e8ef528fb746341cf469b01862
+    source-commit: fe359e619e1baa06eb7f7cea8c3bf56cd66f4de2
     override-build: |
       env
       # NOTE: The check for Mopidy's apt archive presence in sources.list is disabled,
