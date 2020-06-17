@@ -20,6 +20,6 @@ esac
 export XDG_CONFIG_DIRS=$SNAP/etc/xdg:$XDG_CONFIG_DIRS
 
 # Tizonia's plugins directory
-export TIZONIA_PLUGINS_DIR=$SNAP/usr/lib/$SNAP_ARCH/tizonia0-plugins12
+export TIZONIA_PLUGINS_DIR=$SNAP/usr/lib/$ARCH/tizonia0-plugins12
 
 $SNAP/usr/bin/tizonia "$@"
